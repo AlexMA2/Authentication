@@ -1,0 +1,51 @@
+h1 {
+  color: #fff;
+}
+
+.container {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  width: 100%;
+  min-width: 150px;
+}
+
+p {
+  color: var(--gray-400);
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+
+.inputs>div {
+  width: 100%;
+  color: var(--gray-400);
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.inputs>div>small {
+  padding: 0.75rem 0 0 0.25rem;
+}
+
+.terms {
+  text-align: center;
+  line-height: 1rem;
+  font-size: 0.75rem;
+}

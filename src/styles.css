@@ -1,1 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+:root {
+  --primary-color: #1D90F4;
+  --secondary-color: #282A37;
+  --white: #FFFFFF;
+  --gray-100: #EEEEEE;
+  --gray-200: #DDDDDD;
+  --gray-300: #CCCCCC;
+  --gray-400: #BBBBBB;
+  --gray-500: #AAAAAA;
+  --gray-600: #999999;
+  --gray-700: #888888;
+  --gray-800: #777777;
+  --gray-900: #666666;
+  --gray-1000: #555555;
+  --gray-1100: #444444;
+  --gray-1200: #333333;
+  --gray-1300: #222222;
+  --black: #111111;
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.p-inputtext, .p-password, p-password-panel {
+  width: 100% !important;
+}

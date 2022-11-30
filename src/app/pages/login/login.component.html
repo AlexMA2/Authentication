@@ -1,0 +1,64 @@
+<div class="container">
+  <h1>Welcome again!</h1>
+  <p>
+    Do not have an account? <a href="" [routerLink]="['/register']">Sign Up</a>
+  </p>
+  <form class="inputs">
+    <div>
+      <span class="p-input-icon-right p-float-label">
+        <i class="pi pi-envelope"></i>
+        <input
+          type="text"
+          name="email"
+          pInputText
+          [ngClass]="{
+            'ng-invalid ng-dirty': inputsData.get('email')!.hasError
+          }"
+          [(ngModel)]="inputsData.get('email')!.value"
+          (focus)="inputsData.get('email')!.hasError = false"
+          (blur)="checkInput('email')"
+        />
+        <label for="float-input">Email</label>
+      </span>
+      <small *ngIf="inputsData.get('email')!.hasError" class="p-error block">{{
+        inputsData.get("email")!.actualError
+      }}</small>
+    </div>
+    <div>
+      <p-password
+        class="w-100"
+        name="password"
+        placeholder="Password"
+        [(ngModel)]="inputsData.get('password')!.value"
+        [toggleMask]="true"
+        (onFocus)="inputsData.get('password')!.hasError = false"
+        (onBlur)="checkInput('password')"
+        [ngClass]="{
+          'ng-invalid ng-dirty': inputsData.get('password')!.hasError
+        }"
+      ></p-password>
+      <small
+        *ngIf="inputsData.get('password')!.hasError"
+        class="p-error block"
+        >{{ inputsData.get("password")!.actualError }}</small
+      >
+    </div>
+    <div>
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Log In"
+        class="p-button-rounded"
+        (click)="submit()"
+        [disabled]="isValid()"
+      ></button>
+    </div>
+    <div>
+      <p class="terms">
+        By clicking the button you are accepting the
+        <a href="" [routerLink]="['/terms']"> Terms And Conditions</a>
+      </p>
+    </div>
+  </form>
+</div>
