@@ -13,7 +13,6 @@
             'ng-invalid ng-dirty': inputsData.get('username')!.hasError
           }"
           [(ngModel)]="inputsData.get('username')!.value"
-          (focus)="inputsData.get('username')!.hasError = false"
           (blur)="checkInput('username')"
         />
         <label for="float-input">Username</label>

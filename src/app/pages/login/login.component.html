@@ -15,7 +15,6 @@
             'ng-invalid ng-dirty': inputsData.get('email')!.hasError
           }"
           [(ngModel)]="inputsData.get('email')!.value"
-          (focus)="inputsData.get('email')!.hasError = false"
           (blur)="checkInput('email')"
         />
         <label for="float-input">Email</label>
@@ -51,7 +50,7 @@
         label="Log In"
         class="p-button-rounded"
         (click)="submit()"
-        [disabled]="isValid()"
+        [disabled]="!isValid()"
       ></button>
     </div>
     <div>

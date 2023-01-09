@@ -4,25 +4,28 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ErrorBuilder } from 'src/app/utils/ErrorBuilder';
 import { InputError } from 'src/app/utils/InputError';
 
+import { MessageService } from 'primeng/api';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['../login/login.component.css'],
+  providers: [MessageService],
 })
 export class RegisterComponent implements OnInit {
-  inputsData: Map<string, InputError> = new Map([
+  inputsData: Map<string, InputError<any>> = new Map([
     [
       'username',
-      new ErrorBuilder('Username')
+      new ErrorBuilder<string>('Username')
         .required()
         .minLength(3)
         .maxLength(15)
         .build(),
     ],
-    ['email', new ErrorBuilder('Email').required().email().build()],
+    ['email', new ErrorBuilder<string>('Email').required().email().build()],
     [
       'password',
-      new ErrorBuilder('Password')
+      new ErrorBuilder<string>('Password')
         .required()
         .minLength(8)
         .maxLength(40)
@@ -31,7 +34,7 @@ export class RegisterComponent implements OnInit {
     ],
     [
       'confirm',
-      new ErrorBuilder('Confirm password')
+      new ErrorBuilder<string>('Confirm password')
         .required()
         .minLength(8)
         .maxLength(40)
@@ -40,15 +43,21 @@ export class RegisterComponent implements OnInit {
     ],
   ]);
 
-  constructor(private authService: AuthenticationService) {}
+  constructor(
+    private authService: AuthenticationService,
+    private messageService: MessageService
+  ) {}
 
   ngOnInit(): void {}
 
   checkInput(id: string) {
-    const value = this.inputsData.get(id)!.compliesWithAll();
+    const value = this.inputsData.get(id)!.getFirstErrorDescription();
+    console.log(value);
     if (value.length > 0) {
       this.inputsData.get(id)!.hasError = true;
       this.inputsData.get(id)!.actualError = value;
+    } else {
+      this.inputsData.get(id)!.hasError = false;
     }
     if (id === 'password' || id === 'confirm') {
       this.checkMatch('password', 'confirm');
@@ -65,8 +74,10 @@ export class RegisterComponent implements OnInit {
   }
 
   checkMatch(field1: string, field2: string) {
-    const password: InputError | undefined = this.inputsData.get(field1);
-    const confirmPassword: InputError | undefined = this.inputsData.get(field2);
+    const password: InputError<string> | undefined =
+      this.inputsData.get(field1);
+    const confirmPassword: InputError<string> | undefined =
+      this.inputsData.get(field2);
     if (!password || !confirmPassword) {
       return;
     }
@@ -86,6 +97,12 @@ export class RegisterComponent implements OnInit {
   }
 
   submit() {
+    this.messageService.add({
+      key: 'bc',
+      severity: 'Success',
+      summary: 'LOADING!',
+      detail: 'loading',
+    });
     if (this.isValid()) {
       this.authService
         .signUp(
@@ -96,12 +113,31 @@ export class RegisterComponent implements OnInit {
         )
         .subscribe({
           next: (data) => {
+            this.messageService.add({
+              key: 'bc',
+              severity: 'Success',
+              summary: 'Congratulations!',
+              detail: 'Now, you are registered',
+            });
             console.log(data);
           },
           error: (error) => {
             console.log(error);
+            this.messageService.add({
+              key: 'bc',
+              severity: 'Error',
+              summary: 'Something went wrong',
+              detail: error || 'Unknown error',
+            });
           },
         });
+    } else {
+      this.messageService.add({
+        key: 'bc',
+        severity: 'Error',
+        summary: 'Fill the form correctly',
+        detail: 'Some fields are not valid',
+      });
     }
   }
 }

@@ -1,7 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Rowdies&display=swap');
 
 :root {
-  --primary-color: #1D90F4;
   --secondary-color: #282A37;
   --white: #FFFFFF;
   --gray-100: #EEEEEE;
@@ -20,11 +19,13 @@
   --black: #111111;
 }
 
-
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Montserrat', sans-serif;
+}
+
+* {
+  font-family: 'Nunito Sans', sans-serif;
 }
 
 .p-inputtext, .p-password, p-password-panel {

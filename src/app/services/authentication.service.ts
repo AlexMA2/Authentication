@@ -7,7 +7,7 @@ import { environment as env } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AuthenticationService {
-  baseURL = env.API_URL + '/auth';
+  baseURL = env.API_URL + '/Auth';
   constructor(private http: HttpClient) {}
 
   signUp(
@@ -16,9 +16,13 @@ export class AuthenticationService {
     password: string,
     confirm: string
   ): Observable<any> {
+    console.log(username, email, password, confirm);
+    if (password !== confirm) {
+      console.log("Passwords don't match");
+    }
     return this.http
       .post(
-        this.baseURL + '/signup',
+        this.baseURL + '/register',
         {
           username,
           email,
@@ -40,7 +44,7 @@ export class AuthenticationService {
   signIn(email: string, password: string): Observable<any> {
     return this.http
       .post(
-        this.baseURL + '/signin',
+        this.baseURL + '/login',
         {
           email,
           password,

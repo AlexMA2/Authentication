@@ -1,6 +1,6 @@
 import { InputError } from 'src/app/utils/InputError';
-export class ErrorBuilder {
-  private inputError: InputError;
+export class ErrorBuilder<T> {
+  private inputError: InputError<T>;
   private key: string;
   constructor(key: string) {
     this.key = key;

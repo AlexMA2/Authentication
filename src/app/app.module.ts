@@ -12,6 +12,8 @@ import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ButtonModule } from 'primeng/button';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastModule } from 'primeng/toast';
+
 @NgModule({
   declarations: [AppComponent, RegisterComponent, LoginComponent],
   imports: [
@@ -25,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     PasswordModule,
     ButtonModule,
     HttpClientModule,
+    ToastModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

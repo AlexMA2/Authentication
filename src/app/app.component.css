@@ -9,21 +9,25 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-
 }
 
 main {
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   height: 800px;
   width: 95%;
   max-width: 550px;
-  background-color: #282A37;
+  background: #3CA55C;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #B5AC49, #3CA55C);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #B5AC49, #3CA55C);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
   filter: brightness(1);
   border-radius: 1rem;
-  box-shadow: 10px 10px 1rem #2e2e2e;
   padding: 1rem;
-
 }

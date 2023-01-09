@@ -1,5 +1,11 @@
 h1 {
   color: #fff;
+  font-size: 2rem;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-top: 1rem;
+  font-family: 'Rowdies', cursive;
 }
 
 .container {
@@ -13,11 +19,11 @@ h1 {
 }
 
 p {
-  color: var(--gray-400);
+  color: var(--gray-1300);
 }
 
 a {
-  color: var(--primary-color);
+  color: #0004A0;
   text-decoration: none;
 }
 
@@ -35,7 +41,8 @@ a {
   width: 100%;
   color: var(--gray-400);
   font-size: 1rem;
-  margin: 0.5rem 0;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
   display: flex;
   flex-direction: column;
 }

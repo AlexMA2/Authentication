@@ -1,5 +1,5 @@
 import { HttpEventType } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, OnInit } from '@angular/core';
 import { take } from 'rxjs';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ErrorBuilder } from 'src/app/utils/ErrorBuilder';
@@ -10,12 +10,12 @@ import { InputError } from 'src/app/utils/InputError';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit {
-  inputsData: Map<string, InputError> = new Map([
-    ['email', new ErrorBuilder('Email').required().email().build()],
+export class LoginComponent implements OnInit, AfterViewChecked {
+  inputsData: Map<string, InputError<any>> = new Map([
+    ['email', new ErrorBuilder<string>('Email').required().email().build()],
     [
       'password',
-      new ErrorBuilder('Password')
+      new ErrorBuilder<string>('Password')
         .required()
         .minLength(8)
         .maxLength(40)
@@ -27,11 +27,19 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  ngAfterViewChecked(): void {
+    setTimeout(() => {
+      this.checkInput('password');
+    }, 0);
+  }
+
   checkInput(id: string) {
-    const value = this.inputsData.get(id)!.compliesWithAll();
+    const value = this.inputsData.get(id)!.getFirstErrorDescription();
     if (value.length > 0) {
       this.inputsData.get(id)!.hasError = true;
       this.inputsData.get(id)!.actualError = value;
+    } else {
+      this.inputsData.get(id)!.hasError = false;
     }
   }
 
